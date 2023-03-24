@@ -59,3 +59,15 @@ equipmentRoutes.route("/equipment/update/:id").post(function (req, response) {
             response.json(res);
         });
 });
+
+equipmentRoutes.route("/equipment/:id").delete((req, response) => {
+    let db_connect = dbo.getDb();
+    let query = { _id: ObjectId(req.params.id) };
+    db_connect.collection("equipments").deleteOne(query, function (err, obj) {
+        if (err) throw err;
+        console.log("1 document deleted");
+        response.json(obj);
+    });
+});
+
+module.exports = equipmentRoutes;
