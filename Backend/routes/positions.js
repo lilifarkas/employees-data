@@ -2,7 +2,7 @@ const express = require("express");
 
 const positionRoutes = express.Router();
 
-const dbo = require("../db/conn");
+const dbo = require("../db/connection");
 
 const ObjectId = require("mongodb").ObjectId;
 
