@@ -30,3 +30,19 @@ recordRoutes.route("/record/:id").get(function (req, res) {
             res.json(result);
         });
 });
+
+recordRoutes.route("/record/add").post(function (req, response) {
+    let db_connect = dbo.getDb();
+    let myobj = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        middleName: req.body.middleName,
+        position: req.body.position,
+        level: req.body.level,
+        equipment: req.body.equipment,
+    };
+    db_connect.collection("records").insertOne(myobj, function (err, res) {
+        if (err) throw err;
+        response.json(res);
+    });
+});
