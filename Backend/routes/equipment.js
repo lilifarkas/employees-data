@@ -40,3 +40,22 @@ equipmentRoutes.route("/equipment/add").post(function (req, response) {
         response.json(res);
     });
 });
+
+equipmentRoutes.route("/equipment/update/:id").post(function (req, response) {
+    let db_connect = dbo.getDb();
+    let query = { _id: ObjectId(req.params.id) };
+    let newValues = {
+        $set: {
+            name: req.body.name,
+            type: req.body.type,
+            amount: req.body.amount,
+        },
+    };
+    db_connect
+        .collection("equipments")
+        .updateOne(query, newValues, function (err, res) {
+            if (err) throw err;
+            console.log("1 document updated");
+            response.json(res);
+        });
+});
