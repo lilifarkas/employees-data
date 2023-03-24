@@ -16,3 +16,15 @@ equipmentRoutes.route("/equipment").get(function (req, res) {
             res.json(result);
         });
 });
+
+equipmentRoutes.route("/equipment/:id").get(function (req, res) {
+    let db_connect = dbo.getDb();
+    let myquery = { _id: ObjectId(req.params.id) };
+    db_connect
+        .collection("equipments")
+        .findOne(myquery, function (err, result) {
+            if (err) throw err;
+            res.json(result);
+        });
+});
+ 
