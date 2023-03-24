@@ -46,3 +46,25 @@ recordRoutes.route("/record/add").post(function (req, response) {
         response.json(res);
     });
 });
+
+recordRoutes.route("/update/:id").post(function (req, response) {
+    let db_connect = dbo.getDb();
+    let myquery = { _id: ObjectId(req.params.id) };
+    let newvalues = {
+        $set: {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            middleName: req.body.middleName,
+            position: req.body.position,
+            level: req.body.level,
+            equipment: req.params.equipment
+        },
+    };
+    db_connect
+        .collection("records")
+        .updateOne(myquery, newvalues, function (err, res) {
+            if (err) throw err;
+            console.log("1 document updated");
+            response.json(res);
+        });
+});
