@@ -10,7 +10,7 @@ app.use(require("./routes/record"));
 app.use(require("./routes/equipment"));
 app.use(require("./routes/positions"));
 // get driver connection
-const dbo = require("./db/conn");
+const dbo = require("./db/connection");
 
 app.listen(port, () => {
     // perform a database connection when server starts
