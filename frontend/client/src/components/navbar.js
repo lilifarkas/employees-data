@@ -23,7 +23,11 @@ export default function Navbar() {
                         Equipments
                     </NavLink>
                 </button>
-
+                <button>
+                    <NavLink className="nav-link" to="/">
+                        Records
+                    </NavLink>
+                </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
