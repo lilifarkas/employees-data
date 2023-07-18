@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import URL from '../constants/constanUrl';
+
 
 export default function CreateEquipment() {
     const [form, setForm] = useState({
@@ -23,7 +25,7 @@ export default function CreateEquipment() {
         // When a post request is sent to the createequipment url, we'll add a new record to the database.
         const newEquipment = { ...form };
 
-        await fetch("http://localhost:5000/equipment/add", {
+        await fetch(`${URL}equipment/add`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

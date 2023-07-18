@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import URL from '../constants/constanUrl';
+
 
 const Record = (props) => (
     <tr>
@@ -28,7 +30,7 @@ export default function RecordList() {
     // This method fetches the records from the database.
     useEffect(() => {
         async function getRecords() {
-            const response = await fetch(`http://localhost:5000/record/`);
+            const response = await fetch(`${URL}record/`);
 
             if (!response.ok) {
                 const message = `An error occurred: ${response.statusText}`;
@@ -47,7 +49,7 @@ export default function RecordList() {
 
     // This method will delete a record
     async function deleteRecord(id) {
-        await fetch(`http://localhost:5000/${id}`, {
+        await fetch(`${URL}${id}`, {
             method: "DELETE"
         });
 
@@ -70,7 +72,7 @@ export default function RecordList() {
 
     // This method will arrange employees
     async function arrangeEmployees(e) {
-        const response = await fetch(`http://localhost:5000/record/`);
+        const response = await fetch(`${URL}record/`);
         const records = await response.json();
 
         if(e === "---Arrange---") {
@@ -94,7 +96,7 @@ export default function RecordList() {
     }
 
     async function filterPosition(e) {
-        const response = await fetch(`http://localhost:5000/record/`);
+        const response = await fetch(`${URL}record/`);
         const records = await response.json();
 
         let filtered = []
@@ -107,7 +109,7 @@ export default function RecordList() {
     }
 
     async function filterLevel(e) {
-        const response = await fetch(`http://localhost:5000/record/`);
+        const response = await fetch(`${URL}record/`);
         const records = await response.json();
 
         let filtered = []

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import URL from '../constants/constanUrl';
+
 
 const Equipment = (props) => (
     <tr>
@@ -25,7 +27,7 @@ export default function EquipmentList() {
     // This method fetches the records from the database.
     useEffect(() => {
         async function getEquipments() {
-            const response = await fetch(`http://localhost:5000/equipment/`);
+            const response = await fetch(`${URL}equipment/`);
 
             if (!response.ok) {
                 const message = `An error occurred: ${response.statusText}`;
@@ -44,7 +46,7 @@ export default function EquipmentList() {
 
     // This method will delete a record
     async function deleteEquipment(id) {
-        await fetch(`http://localhost:5000/equipment/${id}`, {
+        await fetch(`${URL}equipment/${id}`, {
             method: "DELETE"
         });
 

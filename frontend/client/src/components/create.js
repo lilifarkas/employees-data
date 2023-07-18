@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import Select from 'react-select'
+import URL from '../constants/constanUrl';
 
 export default function Create() {
 
@@ -30,7 +31,7 @@ export default function Create() {
 // When a post request is sent to the create url, we'll add a new record to the database.
         const newPerson = { ...form };
 
-        await fetch("http://localhost:5000/record/add", {
+        await fetch(`${URL}record/add`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -49,7 +50,7 @@ export default function Create() {
                 if( x.name === element){
                     const updatedEquipment = {name: x.name, type: x.type, amount : Number(x.amount) - 1}
 
-                    await fetch(`http://localhost:5000/equipment/update/${x._id}`, {
+                    await fetch(`${URL}equipment/update/${x._id}`, {
                         method: "POST",
                         body: JSON.stringify(updatedEquipment),
                         headers: {
@@ -69,7 +70,7 @@ export default function Create() {
 
     useEffect(() => {
         async function getData() {
-            const response = await fetch(`http://localhost:5000/equipment/`);
+            const response = await fetch(`${URL}equipment/`);
             const equipments = await response.json();
             setEquipment(equipments);
         }
@@ -81,7 +82,7 @@ export default function Create() {
 
     useEffect(() => {
         async function getPositions(){
-            const res = await fetch('http://localhost:5000/position/');
+            const res = await fetch(`${URL}position/`);
             const positions = await res.json();
             setPositions(positions)
         }
