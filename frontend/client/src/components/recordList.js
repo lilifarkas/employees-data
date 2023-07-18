@@ -10,7 +10,11 @@ const Record = (props) => (
         <td>{props.record.middleName}</td>
         <td>{props.record.position}</td>
         <td>{props.record.level}</td>
-        {<td>{props.record.equipment}</td>}
+        <td>
+            {props.record.equipment.map((equipmentName) => (
+                <div key={equipmentName}>{equipmentName}</div>
+            ))}
+        </td>
         <td>
             <Link className="btn btn-link" to={`/edit/${props.record._id}`}>Edit</Link> |
             <button className="btn btn-link"
