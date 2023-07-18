@@ -47,8 +47,13 @@ export default function Create() {
 
         form.equipment.map(element => {
             equipment.map(async x => {
-                if( x.name === element){
-                    const updatedEquipment = {name: x.name, type: x.type, amount : Number(x.amount) - 1}
+                if( x.name === element && Number(x.amount) > 0){
+                    
+                    const updatedEquipment = {
+                        name: x.name,
+                        type: x.type,
+                        amount: Number(x.amount) - 1,
+                    };
 
                     await fetch(`${URL}equipment/update/${x._id}`, {
                         method: "POST",
@@ -93,19 +98,40 @@ export default function Create() {
 
     const [isSelected, setIsSelected] = useState(false)
 
-    function pickOnePosition(e) {
+    // function pickOnePosition(e) {
+    //
+    //     setIsSelected(true)
+    //
+    //     if(setIsSelected){
+    //         console.log(e.target.value)
+    //         updateForm( {position: e.target.value})
+    //         return (
+    //             <div>
+    //
+    //             </div>
+    //         )
+    //     }
+    // }
 
-        setIsSelected(true)
+    function pickEquipment(selectedEquipment) {
+        setIsSelected(true);
 
-        if(setIsSelected){
-            updateForm( {position: e.target.value})
-            return (
-                <div>
-
-                </div>
-            )
+        if (setIsSelected) {
+            const selectedNames = selectedEquipment.map((equipment) => equipment.name);
+            
+            setForm((prevForm) => ({
+                ...prevForm,
+                equipment: selectedNames,
+            }));
         }
     }
+
+    const isFormValid =
+        form.firstName.trim() !== "" &&
+        form.lastName.trim() !== "" &&
+        form.level.trim() !== "";
+
+    const filteredEquipment = equipment.filter((item) => Number(item.amount) > 0);
 
     // This following section will display the form that takes the input from the user.
     return (
@@ -142,18 +168,14 @@ export default function Create() {
                         onChange={(e) => updateForm({ middleName: e.target.value })}
                     />
                 </div>
-                <div className="form-group">
-                    <Select options={positions}
-                            getOptionLabel={(positions) => positions['name']}
-                            getOptionValue={(position) => positions['name']}
-                            className="basic-multi-select" name="equipmentList" isMulti
-                            defaultValue={equipment[0]} classNamePrefix="select"
-                            onChange={ (e) => pickOnePosition(e)}/>
-                </div>
-                {isSelected &&
-                    <div>
-
-                    </div>}
+                {/*<div className="form-group">*/}
+                {/*    <Select options={positions}*/}
+                {/*            getOptionLabel={(positions) => positions['name']}*/}
+                {/*            getOptionValue={(position) => positions['name']}*/}
+                {/*            className="basic-multi-select" name="equipmentList" isMulti*/}
+                {/*            defaultValue={equipment[0]} classNamePrefix="select"*/}
+                {/*            onChange={ (e) => pickOnePosition(e)}/>*/}
+                {/*</div>*/}
                 <div className="form-group">
                     <div className="form-check form-check-inline">
                         <input
@@ -193,13 +215,14 @@ export default function Create() {
                     </div>
                 </div>
                 <br />
+                <label htmlFor="equipments">Equipments:</label>
                 <div className="form-group">
-                    <Select options={equipment}
+                    <Select options={filteredEquipment}
                             getOptionLabel={(equipment) => equipment['name']}
                             getOptionValue={(equipment) => equipment['name']}
                             className="basic-multi-select" name="equipmentList" isMulti
-                            defaultValue={equipment[0]} classNamePrefix="select"
-                            onChange={ (e) => pickOnePosition(e)}/>
+                            defaultValue={[]} classNamePrefix="select"
+                            onChange={(selectedEquipment) => pickEquipment(selectedEquipment)}/>
 
                     {/*equipment.map(element => {
               return (
@@ -221,8 +244,9 @@ export default function Create() {
                 <div className="form-group">
                     <input
                         type="submit"
-                        value="Create person"
+                        value="Create record"
                         className="btn btn-primary"
+                        disabled={!isFormValid}
                     />
                 </div>
             </form>
