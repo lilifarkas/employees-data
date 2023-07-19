@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import URL from '../constants/constanUrl';
-import { Spinner } from 'react-spinners';
+import Spinner from 'react-simple-spinner';
 
 const Record = (props) => (
     <tr>
