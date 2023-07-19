@@ -29,21 +29,26 @@ const Record = (props) => (
 );
 
 export default function RecordList() {
+    const [isLoading, setIsLoading] = useState(true);
     const [records, setRecords] = useState([]);
 
     // This method fetches the records from the database.
     useEffect(() => {
         async function getRecords() {
+            setIsLoading(true);
+            
             const response = await fetch(`${URL}record/`);
 
             if (!response.ok) {
                 const message = `An error occurred: ${response.statusText}`;
                 window.alert(message);
+                setIsLoading(false);
                 return;
             }
 
             const records = await response.json();
             setRecords(records);
+            setIsLoading(false);
         }
 
         getRecords();
@@ -128,33 +133,39 @@ export default function RecordList() {
     // This following section will display the table with the records of individuals.
     return (
         <div>
-            <h3>Record List</h3>
-            <select id = "arrange" onChange={(e) => arrangeEmployees(e.target.value)} >
-                <option> ---Arrange--- </option>
-                <option> First name </option>
-                <option> Last name </option>
-                <option> Middle name </option>
-                <option> Position </option>
-                <option> Level </option>
-            </select>
-            <input id="filterPosition" type="text"
-                   placeholder="Filter by position" onChange={(e) => filterPosition(e.target.value)}></input>
-            <input id="filterLevel" type="text"
-                   placeholder="Filter by level" onChange={(e) => filterLevel(e.target.value)}></input>
-            <table className="table table-striped" style={{ marginTop: 20 }}>
-                <thead>
-                <tr>
-                    <th>Fisrt Name</th>
-                    <th>Last Name</th>
-                    <th>Middle Name</th>
-                    <th>Position</th>
-                    <th>Level</th>
-                    <th>Equipment</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>{recordList()}</tbody>
-            </table>
+            {isLoading ? (
+                <div>Loading...</div> // Display loading sign while records are being fetched
+            ) : (
+                <>
+                    <h3>Record List</h3>
+                    <select id = "arrange" onChange={(e) => arrangeEmployees(e.target.value)} >
+                        <option> ---Arrange--- </option>
+                        <option> First name </option>
+                        <option> Last name </option>
+                        <option> Middle name </option>
+                        <option> Position </option>
+                        <option> Level </option>
+                    </select>
+                    <input id="filterPosition" type="text"
+                           placeholder="Filter by position" onChange={(e) => filterPosition(e.target.value)}></input>
+                    <input id="filterLevel" type="text"
+                           placeholder="Filter by level" onChange={(e) => filterLevel(e.target.value)}></input>
+                    <table className="table table-striped" style={{ marginTop: 20 }}>
+                        <thead>
+                        <tr>
+                            <th>Fisrt Name</th>
+                            <th>Last Name</th>
+                            <th>Middle Name</th>
+                            <th>Position</th>
+                            <th>Level</th>
+                            <th>Equipment</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>{recordList()}</tbody>
+                    </table>
+                </>
+            )}
         </div>
     );
 }
