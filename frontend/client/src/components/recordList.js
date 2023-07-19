@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import URL from '../constants/constanUrl';
-import Spinner from 'react-simple-spinner';
 
 const Record = (props) => (
     <tr>
@@ -134,7 +133,7 @@ export default function RecordList() {
     return (
         <div>
             {isLoading ? (
-                <div><Spinner speed={5} customText={"Loading..."}/></div>
+                <div>Loading...</div>
             ) : (
                 <>
                     <h3>Record List</h3>
