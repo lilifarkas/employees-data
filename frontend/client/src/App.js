@@ -1,11 +1,11 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/navbar";
-import RecordList from "./components/recordList";
+import RecordList from "./components/RecordList/recordList";
 import Edit from "./components/edit";
-import Create from "./components/create";
-import EquipmentList from "./components/equipmentList";
-import CreateEquipment from "./components/createEquipment";
+import Create from "./components/createRecord/create";
+import EquipmentList from "./components/equipmentList/equipmentList";
+import CreateEquipment from "./components/createEquipment/createEquipment";
 import EditEquipment from "./components/editEquipment";
 
 const App = () => {

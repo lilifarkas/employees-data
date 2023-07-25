@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import URL from '../constants/constanUrl';
+import URL from '../../constants/constanUrl';
+import './recordList.css';
 
 const Record = (props) => (
     <tr>
@@ -136,33 +137,47 @@ export default function RecordList() {
                 <div>Loading...</div>
             ) : (
                 <>
-                    <h3>Record List</h3>
-                    <select id = "arrange" onChange={(e) => arrangeEmployees(e.target.value)} >
-                        <option> ---Arrange--- </option>
-                        <option> First name </option>
-                        <option> Last name </option>
-                        <option> Middle name </option>
-                        <option> Position </option>
-                        <option> Level </option>
-                    </select>
-                    <input id="filterPosition" type="text"
-                           placeholder="Filter by position" onChange={(e) => filterPosition(e.target.value)}></input>
-                    <input id="filterLevel" type="text"
-                           placeholder="Filter by level" onChange={(e) => filterLevel(e.target.value)}></input>
-                    <table className="table table-striped" style={{ marginTop: 20 }}>
-                        <thead>
-                        <tr>
-                            <th>Fisrt Name</th>
-                            <th>Last Name</th>
-                            <th>Middle Name</th>
-                            <th>Position</th>
-                            <th>Level</th>
-                            <th>Equipment</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>{recordList()}</tbody>
-                    </table>
+                    <div className="header">
+                        <div className="title">
+                            <h3>Employees</h3>
+                        </div>
+                        <div className="filter">
+                            <div>
+                                <select id = "arrange" onChange={(e) => arrangeEmployees(e.target.value)} >
+                                    <option> ---Arrange--- </option>
+                                    <option> First name </option>
+                                    <option> Last name </option>
+                                    <option> Middle name </option>
+                                    <option> Position </option>
+                                    <option> Level </option>
+                                </select>
+                            </div>
+                            <div>
+                                <input id="filterPosition" type="text"
+                                       placeholder="Filter by position" onChange={(e) => filterPosition(e.target.value)}></input>
+                            </div>
+                            <div>
+                                <input id="filterLevel" type="text"
+                                       placeholder="Filter by level" onChange={(e) => filterLevel(e.target.value)}></input>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="table-container">
+                        <table className="table table-striped" style={{ marginTop: 20 }}>
+                            <thead>
+                            <tr>
+                                <th>Fisrt Name</th>
+                                <th>Last Name</th>
+                                <th>Middle Name</th>
+                                <th>Position</th>
+                                <th>Level</th>
+                                <th>Equipment</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>{recordList()}</tbody>
+                        </table>
+                    </div>
                 </>
             )}
         </div>
