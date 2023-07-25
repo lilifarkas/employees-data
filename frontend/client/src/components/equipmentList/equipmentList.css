@@ -1,0 +1,12 @@
+
+.equipments{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.title-equipments{
+    margin-bottom: 40px;
+}

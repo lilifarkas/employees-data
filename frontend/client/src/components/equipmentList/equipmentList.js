@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import URL from '../constants/constanUrl';
+import URL from '../../constants/constanUrl';
+import './equipmentList.css'
 
 
 const Equipment = (props) => (
@@ -70,8 +71,10 @@ export default function EquipmentList() {
 
     // This following section will display the table with the records of individuals.
     return (
-        <div>
-            <h3>Equipment List</h3>
+        <div className="equipments">
+            <div className="title-equipments">
+                <h3>Equipment List</h3>
+            </div>
 
             <table className="table table-striped" style={{ marginTop: 20 }}>
                 <thead>
