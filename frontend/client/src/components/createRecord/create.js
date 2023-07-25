@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import Select from 'react-select'
-import URL from '../constants/constanUrl';
+import URL from '../../constants/constanUrl';
+import './create.css';
 
 export default function Create() {
 
@@ -135,8 +136,8 @@ export default function Create() {
 
     // This following section will display the form that takes the input from the user.
     return (
-        <div>
-            <h3>Create New Record</h3>
+        <div className="create-record-main">
+            <h3 className="create-record-title">Create New Record</h3>
             <form onSubmit={onSubmit}>
                 <div className="form-group">
                     <label htmlFor="name">First Name</label>
@@ -215,8 +216,8 @@ export default function Create() {
                     </div>
                 </div>
                 <br />
-                <label htmlFor="equipments">Equipments:</label>
                 <div className="form-group">
+                    <label htmlFor="equipments">Equipments:</label>
                     <Select options={filteredEquipment}
                             getOptionLabel={(equipment) => equipment['name']}
                             getOptionValue={(equipment) => equipment['name']}
