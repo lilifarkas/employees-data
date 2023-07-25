@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import URL from '../constants/constanUrl';
+import URL from '../../constants/constanUrl';
+import './createEquipment.css'
 
 
 export default function CreateEquipment() {
@@ -10,12 +11,17 @@ export default function CreateEquipment() {
         amount: "",
     });
     const navigate = useNavigate();
+    const [isFormValid, setIsFormValid] = useState(false);
 
     // These methods will update the state properties.
     function updateForm(value) {
-        return setForm((prev) => {
-            return { ...prev, ...value };
-        });
+        const updatedForm = { ...form, ...value };
+        setForm(updatedForm);
+        setIsFormValid(
+            updatedForm.name.trim() !== "" &&
+            updatedForm.type.trim() !== "" &&
+            updatedForm.amount.trim() !== ""
+        );
     }
 
     // This function will handle the submission.
@@ -38,12 +44,13 @@ export default function CreateEquipment() {
             });
 
         setForm({ name: "", type: "", amount: "" });
+        setIsFormValid(false);
         navigate("/equipment");
     }
 
     // This following section will display the form that takes the input from the user.
     return (
-        <div>
+        <div className="create-equipment-main">
             <h3>Create New Equipment</h3>
             <form onSubmit={onSubmit}>
                 <div className="form-group">
@@ -67,7 +74,7 @@ export default function CreateEquipment() {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="amount">amount</label>
+                    <label htmlFor="amount">Amount</label>
                     <input
                         type="text"
                         className="form-control"
@@ -81,6 +88,7 @@ export default function CreateEquipment() {
                         type="submit"
                         value="Create equipment"
                         className="btn btn-primary"
+                        disabled={!isFormValid}
                     />
                 </div>
             </form>
