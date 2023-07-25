@@ -18,17 +18,19 @@ export default function Navbar() {
                 >
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <button>
-                    <NavLink className="nav-link" to="/equipment">
-                        Equipments
-                    </NavLink>
-                </button>
-                <button>
-                    <NavLink className="nav-link" to="/">
-                        Records
-                    </NavLink>
-                </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul className="navbar-nav mr-auto">
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to="/equipment">
+                                Equipments
+                            </NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to="/">
+                                Employees
+                            </NavLink>
+                        </li>
+                    </ul>
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/create">
