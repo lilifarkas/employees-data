@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
-import URL from '../constants/constanUrl';
+import URL from '../../constants/constanUrl';
+import './editRecord.css'
 
 
 export default function Edit() {
@@ -72,7 +73,7 @@ export default function Edit() {
 
     // This following section will display the form that takes input from the user to update the data.
     return (
-        <div>
+        <div className="edit-record-main">
             <h3>Update Record</h3>
             <form onSubmit={onSubmit}>
                 <div className="form-group">
